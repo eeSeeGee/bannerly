@@ -1,4 +1,4 @@
-##Bannerly
+## Bannerly
 Makes a sweet slack emoji banner.
 
 If you're a true blue nerd here's how you do it with one line:
