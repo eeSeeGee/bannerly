@@ -30,5 +30,10 @@ echo "default test"
 diff $tmpfile defaulttest.txt
 checkResult
 
+echo "grid test"
+./bannerly.rb --text kiss --bg white_square --grid black_square kiss >$tmpfile
+diff $tmpfile gridtest.txt
+checkResult
+
 rm $tmpfile
 

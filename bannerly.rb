@@ -6,7 +6,7 @@ class BannerData
   def initialize(phrase)
     @text = `figlet -f banner #{phrase}`
   end
-  
+
   def bumpCol
     @col = @col +1
   end
@@ -45,6 +45,11 @@ class BannerData
   end
 
   def printBack
+    if !$global_opts[:grid].nil? and @row % 2 == @col % 2
+      print ":#{$global_opts[:grid]}:"
+      return
+    end
+
     if $global_opts[:width] == 0 or $global_opts[:height] == 0
       fill = ''
     else
@@ -65,7 +70,7 @@ class BannerData
         print "\n"
         next
       end
-      
+
       if $global_opts[:border] and @col == 0
         printBack
         bumpCol
@@ -76,7 +81,7 @@ class BannerData
       elsif c == ' '
         printBack
       end
-      
+
       bumpCol
     }
   end
@@ -87,6 +92,7 @@ $global_opts = {
   :height => 0,
   :text => "partyparrot",
   :bg => "cash",
+  :grid => nil,
   :border => true,
 }
 
@@ -102,6 +108,9 @@ OptionParser.new do |opts|
   end
   opts.on("--bg <BG_EMOJI>", "Which emoji to use for the background.") do |v|
     $global_opts[:bg] = v.gsub(/:/, '')
+  end
+  opts.on("--grid <GRID_EMOJI>", "Which emoji to use for the background in grid mode.") do |v|
+    $global_opts[:grid] = v.gsub(/:/, '')
   end
   opts.on("--noborder", "Remove the margin.") do |v|
     $global_opts[:border] = false
