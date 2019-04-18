@@ -3,7 +3,14 @@
 require 'optparse'
 
 class BannerData
-  def initialize(phrase)
+  def initialize(opts, phrase)
+    @width = opts[:width]
+    @height = opts[:height]
+    @textbg = opts[:text]
+    @bg = opts[:bg]
+    @grid = opts[:grid]
+    @border = opts[:border]
+
     @text = `figlet -f banner #{phrase}`
   end
 
@@ -17,7 +24,7 @@ class BannerData
   end
 
   def printTopBorder
-    if $global_opts[:border]
+    if @border
       found = false
       count = 1
       @text.split('').each { |c|
@@ -41,21 +48,21 @@ class BannerData
   end
 
   def printText
-    print ":#{$global_opts[:text]}:"
+    print ":#{@textbg}:"
   end
 
   def printBack
-    if !$global_opts[:grid].nil? and @row % 2 == @col % 2
-      print ":#{$global_opts[:grid]}:"
+    if !@grid.nil? and @row % 2 == @col % 2
+      print ":#{@grid}:"
       return
     end
 
-    if $global_opts[:width] == 0 or $global_opts[:height] == 0
+    if @width == 0 or @height == 0
       fill = ''
     else
-      fill = "#{@row % $global_opts[:height] + 1}#{@col % $global_opts[:width] + 1}"
+      fill = "#{@row % @height + 1}#{@col % @width + 1}"
     end
-    print ":#{$global_opts[:bg]}#{fill}:"
+    print ":#{@bg}#{fill}:"
   end
 
   def output
@@ -71,7 +78,7 @@ class BannerData
         next
       end
 
-      if $global_opts[:border] and @col == 0
+      if @border and @col == 0
         printBack
         bumpCol
       end
@@ -87,7 +94,7 @@ class BannerData
   end
 end
 
-$global_opts = {
+$opts = {
   :width => 0,
   :height => 0,
   :text => "partyparrot",
@@ -98,25 +105,25 @@ $global_opts = {
 
 OptionParser.new do |opts|
   opts.on("--width <WIDTH>", "How wide the banner bigemoji is.") do |v|
-    $global_opts[:width] = v.to_i
+    $opts[:width] = v.to_i
   end
   opts.on("--height <HEIGHT>", "How high the banner bigemoji is.") do |v|
-    $global_opts[:height] = v.to_i
+    $opts[:height] = v.to_i
   end
   opts.on("--text <TEXT_EMOJI>", "Which emoji to use for the text.") do |v|
-    $global_opts[:text] = v.gsub(/:/, '')
+    $opts[:text] = v.gsub(/:/, '')
   end
   opts.on("--bg <BG_EMOJI>", "Which emoji to use for the background.") do |v|
-    $global_opts[:bg] = v.gsub(/:/, '')
+    $opts[:bg] = v.gsub(/:/, '')
   end
   opts.on("--grid <GRID_EMOJI>", "Which emoji to use for the background in grid mode.") do |v|
-    $global_opts[:grid] = v.gsub(/:/, '')
+    $opts[:grid] = v.gsub(/:/, '')
   end
   opts.on("--noborder", "Remove the margin.") do |v|
-    $global_opts[:border] = false
+    $opts[:border] = false
   end
 end.parse!
 
-banner = BannerData.new(ARGV.join(" "))
+banner = BannerData.new($opts, ARGV.join(" "))
 banner.output
 
