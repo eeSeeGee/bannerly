@@ -35,6 +35,8 @@ class BannerData
       @bgEmoji = [EmojiDef.new('moneybag')]
     end
 
+    @bgOffset = opts[:bgoffset]
+
     @text = `figlet -f banner #{phrase}`
   end
 
@@ -45,6 +47,7 @@ class BannerData
   def bumpRow
     @row = @row + 1
     @col = 0
+    @shift = @shift + @bgOffset
   end
 
   def printTopBorder
@@ -82,12 +85,13 @@ class BannerData
   def printEmoji(emoji)
     $size = emoji.size
     $pos = (@row % $size + @col % $size) % $size
-    emoji[$pos].write(@row, @col)
+    emoji[$pos].write(@row, @col + @shift)
   end
 
   def output
     @row = 0
     @col = 0
+    @shift = 0
 
     printTopBorder
 
@@ -118,17 +122,21 @@ $opts = {
   :text => [],
   :bg => [],
   :border => true,
+  :bgoffset => 0,
 }
 
 OptionParser.new do |opts|
-  opts.on("--text <TEXT_EMOJI>", "Which emoji to use for the text.") do |v|
+  opts.on("--text <TEXT_EMOJI>((:height):width)", "Which emoji to use for the text.") do |v|
     $opts[:text].push(v)
   end
-  opts.on("--bg <BG_EMOJI>", "Which emoji to use for the background.") do |v|
+  opts.on("--bg <BG_EMOJI>((:height):width)", "Which emoji to use for the background.") do |v|
     $opts[:bg].push(v)
   end
   opts.on("--noborder", "Remove the margin.") do |v|
     $opts[:border] = false
+  end
+  opts.on("--bgoffset <OFFSET>", "Shift the start position of each row by this many spaces (accumulating).") do |v|
+    $opts[:bgoffset] = v.to_i
   end
 end.parse!
 

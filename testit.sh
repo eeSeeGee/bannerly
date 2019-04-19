@@ -55,5 +55,10 @@ echo "text grid test"
 diff $tmpfile gridtexttest.txt
 checkResult
 
+echo "offset background test"
+./bannerly.rb --text parrot --bg parrot-wave:7 --bgoffset 1 hello >$tmpfile
+diff $tmpfile offsetbgtest.txt
+checkResult
+
 rm $tmpfile
 
