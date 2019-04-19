@@ -1,0 +1,8 @@
+:moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag:
+:moneybag::stg22::moneybag::moneybag::moneybag::moneybag::stg21::moneybag::stg23::moneybag::moneybag::stg23::stg21::stg22::stg23::moneybag::moneybag::moneybag::stg21::stg22::stg23::stg21::moneybag::moneybag:
+:moneybag::stg32::moneybag::moneybag::moneybag::stg33::moneybag::moneybag::stg33::moneybag::stg32::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::stg33::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag:
+:moneybag::stg12::stg13::stg11::stg12::moneybag::moneybag::moneybag::stg13::moneybag::moneybag::stg13::stg11::stg12::stg13::moneybag::moneybag::moneybag::stg11::stg12::stg13::stg11::moneybag::moneybag:
+:moneybag::stg22::moneybag::moneybag::stg22::moneybag::moneybag::moneybag::stg23::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::stg21::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::stg22::moneybag:
+:moneybag::stg32::moneybag::moneybag::moneybag::stg33::moneybag::moneybag::stg33::moneybag::stg32::moneybag::moneybag::moneybag::moneybag::stg31::moneybag::stg33::moneybag::moneybag::moneybag::moneybag::stg32::moneybag:
+:moneybag::stg12::moneybag::moneybag::moneybag::moneybag::stg11::moneybag::stg13::moneybag::moneybag::stg13::stg11::stg12::stg13::moneybag::moneybag::moneybag::stg11::stg12::stg13::stg11::moneybag::moneybag:
+:moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag::moneybag:

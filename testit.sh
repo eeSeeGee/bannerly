@@ -10,29 +10,49 @@ checkResult() {
   fi
 }
 
-echo "stg test"
-./bannerly.rb --width 3 --height 3 --text aaa --bg stg hello >$tmpfile
-diff $tmpfile stgtest.txt
-checkResult
-
-echo "stg test no border"
-./bannerly.rb --width 3 --height 3 --text aaa --bg stg --noborder hello >$tmpfile
-diff $tmpfile stgtestnoborder.txt
-checkResult
-
-echo "cash test"
-./bannerly.rb --text aaa --bg cash hello >$tmpfile
-diff $tmpfile cashtest.txt
-checkResult
-
 echo "default test"
 ./bannerly.rb hello >$tmpfile
 diff $tmpfile defaulttest.txt
 checkResult
 
+echo "stg test"
+./bannerly.rb --text aaa --bg stg:3:3 hello >$tmpfile
+diff $tmpfile stgtest.txt
+checkResult
+
+echo "stg text test"
+./bannerly.rb --text stg:3:3 --bg moneybag kiss >$tmpfile
+diff $tmpfile stgtexttest.txt
+checkResult
+
+echo "stg test no border"
+./bannerly.rb --text aaa --bg stg:3:3 --noborder hello >$tmpfile
+diff $tmpfile stgtestnoborder.txt
+checkResult
+
+echo "kash test"
+./bannerly.rb --text aaa --bg kash hello >$tmpfile
+diff $tmpfile kashtest.txt
+checkResult
+
 echo "grid test"
-./bannerly.rb --text kiss --bg white_square --grid black_square kiss >$tmpfile
+./bannerly.rb --text kiss --bg black_square --bg white_square kiss >$tmpfile
 diff $tmpfile gridtest.txt
+checkResult
+
+echo "triple grid test"
+./bannerly.rb --text kiss --bg black_square --bg white_square --bg square kiss >$tmpfile
+diff $tmpfile triplegridtest.txt
+checkResult
+
+echo "big grid test"
+./bannerly.rb --text kiss --bg stg:3:3 --bg big-thinking-:4:4 kiss >$tmpfile
+diff $tmpfile biggridtest.txt
+checkResult
+
+echo "text grid test"
+./bannerly.rb --text white_square --text black_square hello >$tmpfile
+diff $tmpfile gridtexttest.txt
 checkResult
 
 rm $tmpfile

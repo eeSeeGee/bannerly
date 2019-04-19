@@ -2,14 +2,38 @@
 
 require 'optparse'
 
+class EmojiDef
+  def initialize(emojiStr)
+    @emoji, sp, width, sp2, height = emojiStr.match(/([\w-]+)(:(\d+)(:(\d+))?)?$/).captures
+    @width = width.nil? ? nil : width.to_i
+    @height = height.nil? ? nil : height.to_i
+  end
+
+  def write(row, col)
+    fill = ''
+    if !@height.nil?
+      fill = "#{fill}#{row % @height + 1}"
+    end
+    if !@width.nil?
+      fill = "#{fill}#{col % @width + 1}"
+    end
+    print ":#{@emoji}#{fill}:"
+  end
+end
+
 class BannerData
   def initialize(opts, phrase)
-    @width = opts[:width]
-    @height = opts[:height]
-    @textbg = opts[:text]
-    @bg = opts[:bg]
-    @grid = opts[:grid]
     @border = opts[:border]
+
+    @textEmoji = opts[:text].map { |emoji| EmojiDef.new(emoji) }
+    if @textEmoji.empty?
+      @textEmoji = [EmojiDef.new('poop')]
+    end
+
+    @bgEmoji = opts[:bg].map { |emoji| EmojiDef.new(emoji) }
+    if @bgEmoji.empty?
+      @bgEmoji = [EmojiDef.new('moneybag')]
+    end
 
     @text = `figlet -f banner #{phrase}`
   end
@@ -48,21 +72,17 @@ class BannerData
   end
 
   def printText
-    print ":#{@textbg}:"
+    printEmoji(@textEmoji)
   end
 
   def printBack
-    if !@grid.nil? and @row % 2 == @col % 2
-      print ":#{@grid}:"
-      return
-    end
+    printEmoji(@bgEmoji)
+  end
 
-    if @width == 0 or @height == 0
-      fill = ''
-    else
-      fill = "#{@row % @height + 1}#{@col % @width + 1}"
-    end
-    print ":#{@bg}#{fill}:"
+  def printEmoji(emoji)
+    $size = emoji.size
+    $pos = (@row % $size + @col % $size) % $size
+    emoji[$pos].write(@row, @col)
   end
 
   def output
@@ -95,29 +115,17 @@ class BannerData
 end
 
 $opts = {
-  :width => 0,
-  :height => 0,
-  :text => "partyparrot",
-  :bg => "cash",
-  :grid => nil,
+  :text => [],
+  :bg => [],
   :border => true,
 }
 
 OptionParser.new do |opts|
-  opts.on("--width <WIDTH>", "How wide the banner bigemoji is.") do |v|
-    $opts[:width] = v.to_i
-  end
-  opts.on("--height <HEIGHT>", "How high the banner bigemoji is.") do |v|
-    $opts[:height] = v.to_i
-  end
   opts.on("--text <TEXT_EMOJI>", "Which emoji to use for the text.") do |v|
-    $opts[:text] = v.gsub(/:/, '')
+    $opts[:text].push(v)
   end
   opts.on("--bg <BG_EMOJI>", "Which emoji to use for the background.") do |v|
-    $opts[:bg] = v.gsub(/:/, '')
-  end
-  opts.on("--grid <GRID_EMOJI>", "Which emoji to use for the background in grid mode.") do |v|
-    $opts[:grid] = v.gsub(/:/, '')
+    $opts[:bg].push(v)
   end
   opts.on("--noborder", "Remove the margin.") do |v|
     $opts[:border] = false
