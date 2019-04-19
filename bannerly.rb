@@ -84,7 +84,7 @@ class BannerData
 
   def printEmoji(emoji)
     $size = emoji.size
-    $pos = (@row % $size + @col % $size) % $size
+    $pos = (@row % $size + @col + @shift) % $size
     emoji[$pos].write(@row, @col + @shift)
   end
 

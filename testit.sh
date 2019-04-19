@@ -60,5 +60,10 @@ echo "offset background test"
 diff $tmpfile offsetbgtest.txt
 checkResult
 
+echo "offset grid background test"
+./bannerly.rb --text parrot-fast --bg cashalpha-c --bg cashalpha-a --bg cashalpha-s --bg cashalpha-h --bgoffset 1 cash >$tmpfile
+diff $tmpfile offsetgridtest.txt
+checkResult
+
 rm $tmpfile
 
