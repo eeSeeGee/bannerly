@@ -3,6 +3,7 @@
 require 'optparse'
 
 require_relative 'banner_data'
+require_relative 'figlet_generator'
 
 $opts = {
   :text => [],
@@ -26,6 +27,8 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-banner = BannerData.new(ARGV.join(" "), $opts[:text], $opts[:bg], $opts[:bgoffset], $opts[:border])
+generator = FigletGenerator.new
+
+banner = BannerData.new(generator.generate(ARGV.join(" ")), $opts[:text], $opts[:bg], $opts[:bgoffset], $opts[:border])
 print banner.output
 

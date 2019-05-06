@@ -1,5 +1,6 @@
 require_relative 'emoji_def'
 
+# BannerData renders a string where ' ' is the background and '#' the foreground into Slack emojis.
 class BannerData
   def initialize(phrase, textEmojis = [], bgEmojis = [], bgoffset = 0, border = true)
     @border = border
@@ -16,7 +17,7 @@ class BannerData
 
     @bgOffset = bgoffset
 
-    @text = `figlet -f banner #{phrase}`
+    @text = phrase
   end
 
   def bumpCol
