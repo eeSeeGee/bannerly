@@ -9,6 +9,7 @@ require_relative 'banner_generator'
 $opts = {
   :text => [],
   :bg => [],
+  :vertical => false,
   :border => true,
   :bgoffset => 0,
   :bannermode => false
@@ -24,6 +25,9 @@ OptionParser.new do |opts|
   opts.on("--noborder", "Remove the margin.") do |v|
     $opts[:border] = false
   end
+  opts.on("--vertical", "Print the banner vertically.") do |v|
+    $opts[:vertical] = true
+  end
   opts.on("--bgoffset <OFFSET>", "Shift the start position of each row by this many spaces (accumulating).") do |v|
     $opts[:bgoffset] = v.to_i
   end
@@ -36,7 +40,7 @@ end.parse!
 if $opts[:bannermode] then
   generator = BannerGenerator.new($opts[:bg], $opts[:bgoffset] > 0)
 else
-  generator = FigletGenerator.new
+  generator = FigletGenerator.new($opts[:vertical])
 end
 
 banner = BannerData.new(generator.generate(ARGV.join(" ")), $opts[:text], $opts[:bg], $opts[:bgoffset], $opts[:border])
