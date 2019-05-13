@@ -1,6 +1,6 @@
 class EmojiDef
   def initialize(emojiStr)
-    @emoji, sp, width, sp2, height = emojiStr.match(/([\w-]+)(:(\d+)(:(\d+))?)?$/).captures
+    @emoji, sp, width, @mid, sp2, height = emojiStr.match(/([\w-]+)(:(\d+)([\w-]+)?(:(\d+))?)?$/).captures
     @width = width.nil? ? nil : width.to_i
     @height = height.nil? ? nil : height.to_i
   end
@@ -10,6 +10,11 @@ class EmojiDef
     if !@height.nil?
       fill = "#{fill}#{row % @height + 1}"
     end
+
+    if !@mid.nil?
+      fill << @mid
+    end
+
     if !@width.nil?
       fill = "#{fill}#{col % @width + 1}"
     end
