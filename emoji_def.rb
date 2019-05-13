@@ -15,5 +15,14 @@ class EmojiDef
     end
     ":#{@emoji}#{fill}:"
   end
+
+  def width
+    return @width.nil? ? 1 : @width
+  end
+
+  def height
+    return @height.nil? ? 1 : @height
+  end
+
 end
 
