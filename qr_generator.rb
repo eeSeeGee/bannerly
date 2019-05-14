@@ -7,7 +7,7 @@ class QRGenerator
 
   def generate(phrase)
     qrcode = RQRCode::QRCode.new(phrase)
-    qrcode.to_s.gsub(/x/, '#')
+    qrcode.to_s.gsub(/x/, '#') + "\n"
   end
 
 end
