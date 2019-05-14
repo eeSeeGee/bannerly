@@ -5,6 +5,7 @@ require 'optparse'
 require_relative 'banner_data'
 require_relative 'figlet_generator'
 require_relative 'banner_generator'
+require_relative 'qr_generator'
 
 $opts = {
   :text => [],
@@ -12,7 +13,8 @@ $opts = {
   :vertical => false,
   :border => true,
   :bgoffset => 0,
-  :bannermode => false
+  :bannermode => false,
+  :qrcode => false
 }
 
 OptionParser.new do |opts|
@@ -35,10 +37,15 @@ OptionParser.new do |opts|
     $opts[:bannermode] = true
     $opts[:border] = false
   end
+  opts.on("--qrcode", "Print a QR code.") do |v|
+    $opts[:qrcode] = true
+  end
 end.parse!
 
 if $opts[:bannermode] then
   generator = BannerGenerator.new($opts[:bg], $opts[:bgoffset] > 0)
+elsif $opts[:qrcode] then
+  generator = QRGenerator.new
 else
   generator = FigletGenerator.new($opts[:vertical])
 end
