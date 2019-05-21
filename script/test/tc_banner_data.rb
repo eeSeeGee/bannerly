@@ -1,7 +1,7 @@
 require 'test/unit'
 
-require_relative 'banner_data'
-require_relative 'figlet_generator'
+require_relative '../banner/banner_data'
+require_relative '../generators/figlet_generator'
 
 class TC_BannerData < Test::Unit::TestCase
 
@@ -61,7 +61,7 @@ class TC_BannerData < Test::Unit::TestCase
   end
 
   def execTest(banner, wantFile)
-    want = File.read(wantFile)
+    want = File.read("../../testdata/#{wantFile}")
     got = banner.output
     assert_equal(want, got)
   end

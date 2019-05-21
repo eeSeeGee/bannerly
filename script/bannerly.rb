@@ -2,10 +2,11 @@
 
 require 'optparse'
 
-require_relative 'banner_data'
-require_relative 'figlet_generator'
-require_relative 'banner_generator'
-require_relative 'qr_generator'
+require_relative 'banner/banner_data'
+
+require_relative 'generators/figlet_generator'
+require_relative 'generators/banner_generator'
+require_relative 'generators/qr_generator'
 
 $opts = {
   :text => [],

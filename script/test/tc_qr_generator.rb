@@ -1,6 +1,6 @@
 require 'test/unit'
 
-require_relative 'qr_generator'
+require_relative '../generators/qr_generator'
 
 class TC_QRGenerator < Test::Unit::TestCase
 

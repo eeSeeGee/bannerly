@@ -1,6 +1,6 @@
 require 'test/unit'
 
-require_relative 'figlet_generator'
+require_relative '../generators/figlet_generator'
 
 class TC_FigletGenerator < Test::Unit::TestCase
 

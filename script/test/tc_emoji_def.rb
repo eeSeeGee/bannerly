@@ -1,6 +1,6 @@
 require 'test/unit'
 
-require_relative 'emoji_def'
+require_relative '../banner/emoji_def'
 
 class TC_EmojiDef < Test::Unit::TestCase
 

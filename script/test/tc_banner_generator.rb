@@ -1,6 +1,6 @@
 require 'test/unit'
 
-require_relative 'banner_generator'
+require_relative '../generators/banner_generator'
 
 class TC_BannerGenerator < Test::Unit::TestCase
 

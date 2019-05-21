@@ -1,5 +1,5 @@
 require_relative 'generate_interface'
-require_relative 'emoji_def'
+require_relative '../banner/emoji_def'
 
 class BannerGenerator
   include Generator
