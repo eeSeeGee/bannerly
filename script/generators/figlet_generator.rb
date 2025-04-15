@@ -9,7 +9,19 @@ class FigletGenerator
 
   def generate(phrase)
     if !@vertical
-      return `figlet -f banner #{phrase}`
+      lines = phrase.split('\n')
+      fig = ''
+      lines.each { |line|
+        fig << `figlet -f banner '#{line}'`
+      }
+
+      output = ''
+      maxLen = fig.split("\n").max_by(&:length).length
+      fig.split("\n").each { |line|
+        output << (line.ljust(maxLen, ' ')) << "\n"
+      }
+
+      return output
     end
 
     figs = []
