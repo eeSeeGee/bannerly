@@ -18,7 +18,7 @@ class FigletGenerator
       output = ''
       maxLen = fig.split("\n").max_by(&:length).length
       fig.split("\n").each { |line|
-        output << (line.ljust(maxLen, ' ')) << "\n"
+        output << (line.center(maxLen, ' ')) << "\n"
       }
 
       return output
